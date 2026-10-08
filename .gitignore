@@ -18,6 +18,10 @@
 .env.test.local
 .env.production.local
 
+# Firebase emulator logs
+firebase-debug.log
+firestore-debug.log
+
 # misc
 .DS_Store
 
