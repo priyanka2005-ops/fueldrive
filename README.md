@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# FuelDrive
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+FuelDrive is a React application for managing fuel orders, vehicle information, and important vehicle documents. It uses Firebase Authentication, Firestore, and Storage for account management, data persistence, and document uploads.
+
+## Features
+
+- Email and password registration and login
+- Firebase-backed user sessions
+- Vehicle details stored in Firestore
+- Fuel order history
+- Upload and download vehicle documents
+- Local Firebase emulator support for development
+- Responsive React interface built with Tailwind CSS
+
+## Technology Stack
+
+- React 19 and React Scripts 5
+- JavaScript
+- Tailwind CSS
+- Firebase Authentication
+- Firebase Firestore
+- Firebase Storage
+- Jest and Testing Library
+
+## Prerequisites
+
+- Node.js and npm
+- Java 21 for Firebase emulators
+- Firebase CLI
+- A Firebase project with Authentication, Firestore, and Storage enabled
+
+## Installation
+
+```bash
+npm install
+```
+
+Create a local `.env` file in the project root and add your Firebase project configuration. `.env` is ignored by Git and must not be committed.
+
+The application reads the following variables from `.env`:
+
+```env
+REACT_APP_FIREBASE_API_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+REACT_APP_FIREBASE_APP_ID=
+```
+
+For local development, the application can use Firebase emulators. Set `REACT_APP_USE_FIREBASE_EMULATOR=true` in `.env` and start the emulators separately:
+
+```bash
+firebase emulators:start --only auth,firestore,storage
+```
+
+The emulator host and ports can be overridden with `REACT_APP_FIREBASE_EMULATOR_HOST`, `REACT_APP_FIREBASE_AUTH_EMULATOR_PORT`, `REACT_APP_FIREBASE_FIRESTORE_EMULATOR_PORT`, and `REACT_APP_FIREBASE_STORAGE_EMULATOR_PORT`.
+
+## Run Locally
+
+Start the React development server:
+
+```bash
+npm start
+```
+
+The development server is available at `http://localhost:3000` by default. If port 3000 is already in use, React Scripts selects another available port.
 
 ## Available Scripts
 
-In the project directory, you can run:
+```bash
+npm start   # Start the development server
+npm test    # Run the test suite in watch mode
+npm run build
+```
 
-### `npm start`
+Create a production build with:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm run build
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Firebase Development
 
-### `npm test`
+The Firebase emulator configuration is defined in `firebase.json`. The emulator ports are:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Authentication: `9099`
+- Firestore: `8080`
+- Storage: `9199`
 
-### `npm run build`
+Run the emulators from the project directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+firebase emulators:start --only auth,firestore,storage
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The application uses emulator-aware Firebase initialization when emulator environment variables are enabled.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Testing
 
-### `npm run eject`
+Run the test suite once:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+CI=true npm test -- --watchAll=false
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Project Notes
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- User accounts and vehicle data are stored in Firebase Firestore.
+- Vehicle documents are stored in Firebase Storage.
+- Firebase security rules should be configured before using the application in production.
+- Do not commit real Firebase credentials or emulator secrets.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Supporting Documentation
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [Firebase setup guide](FIREBASE_SETUP.md)
+- [Firebase integration summary](FIREBASE_INTEGRATION.md)
+- [Firebase credential guidance](GET_FIREBASE_CREDENTIALS.md)
